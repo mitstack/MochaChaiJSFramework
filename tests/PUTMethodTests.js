@@ -8,7 +8,7 @@ const assert = require("chai").assert;
 describe("API PUT Test", () => {
 
   // Test - 1 : Make a PUT request to the posts route and update the newly added user
-  it("PUT API Response is Ok /posts", (done) => {
+  it("PUT API Response is Ok /posts", () => {
     var commonHeaders = {    
       "X-Testing-Value":1,
       "X-Common-Header":"value",
@@ -16,7 +16,7 @@ describe("API PUT Test", () => {
     };
     
       request
-      .put("/posts/1")
+      .put(testdata.getvalidtest)
       .set(commonHeaders)
       .send(testdata.requestbody)
       .expect(400)
@@ -25,31 +25,27 @@ describe("API PUT Test", () => {
         //assertion response is not empty       
         assert.isNotEmpty(res.body);          
       });    
-      done();
+      
   });
 
 
-  it("PUT API Schema Validation  /posts", (done) => {
+  it("PUT API Schema Validation  /posts", () => {
     var commonHeaders = {      
       "X-Testing-Value":1,
       "X-Common-Header":"value"
     };
-    var requestbody = {
-        title: 'foo',
-        body: 'bar',
-        userId: 1
-    }
+    
       request
-      .put("/posts/1")
-      .set(commonHeaders)
-      .send(requestbody)
+      .put(testdata.getvalidtest)
+      .set(testdata.commonHeaders)
+      .send(testdata.requestbody)
       .expect(200)
       .then((res) => {
        
         //assertion response is correct
         assert.equal(res.body, requestbody);    
       });
-      done();
+     
   });
 
 })
