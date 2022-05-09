@@ -8,15 +8,11 @@ describe("End To End Tests", () => {
 
     it("Updating the recently added User", (done) => {
 
-        var requestbody = {
-            title: 'foo',
-            body: 'bar',
-            userId: 1
-        }
+        
 
 request
   .post('/posts')
-  .send(requestbody)
+  .send(testdata.requestbody)
   .expect(200)
   .then((response) => {
 // verify post response
@@ -27,7 +23,7 @@ request
       .put('/posts/1')
       .send(requestbody)
       .expect(200)
-      .expect(function (response) {
+      .expect(function testdata.(response) {
         // updating the recently added post
         assert.isNotEmpty(response.body);
       })
@@ -35,9 +31,9 @@ request
 
       request
       .get('/posts/1')
-      .send(requestbody)
+      .send(testdata.requestbody)
       .expect(200)
-      .expect(function (response) {
+      .expect(function (testdata.response) {
         // updating the recently added post - bug in the api (no real time changes)
        // assert.equal(response.body, requestbody);
       })
