@@ -9,15 +9,11 @@ describe("API PUT Test", () => {
 
   // Test - 1 : Make a PUT request to the posts route and update the newly added user
   it("PUT API Response is Ok /posts", (done) => {
-    var commonHeaders = {    
-      "X-Testing-Value":1,
-      "X-Common-Header":"value",
-      "Content-type": "application/json; charset=UTF-8"
-    };
+    
     
       request
-      .put("/posts/1")
-      .set(commonHeaders)
+      .put(testdata.getinvalidtest)
+      .set(testdata.commonHeaders)
       .send(testdata.requestbody)
       .expect(400)
       .then((res) => {
@@ -30,24 +26,17 @@ describe("API PUT Test", () => {
 
 
   it("PUT API Schema Validation  /posts", (done) => {
-    var commonHeaders = {      
-      "X-Testing-Value":1,
-      "X-Common-Header":"value"
-    };
-    var requestbody = {
-        title: 'foo',
-        body: 'bar',
-        userId: 1
-    }
+    
+    
       request
-      .put("/posts/1")
-      .set(commonHeaders)
-      .send(requestbody)
+      .put(testdata.getinvalidtest)
+      .set(testdata.commonHeaders)
+      .send(testdata.requestbody)
       .expect(200)
       .then((res) => {
        
         //assertion response is correct
-        assert.equal(res.body, requestbody);    
+        assert.equal(res.body, testdata.requestbody);    
       });
       done();
   });
