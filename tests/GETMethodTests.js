@@ -6,14 +6,26 @@ const request = require("supertest")(testdata.apiendpoint);
 const assert = require("chai").assert;
 var should = require("chai").should();
 
+
+
 /*TODO : Add Callback function ForEach loop to add test(s) data*/
+
+function GetCallResponse() {
+
+   return request
+      .get(testdata.getvalidtest)
+      .set(testdata.commonHeaders)
+
+}
 
 describe("API GET Tests", () => {
   // Test 1 : Make a GET request to the single posts route and do schema validation
-  it("GET - Response Validation for Single Posts", () => {
-    return request
-      .get(testdata.getvalidtest)
-      .set(testdata.commonHeaders)
+  it("GET - Response Validation for Single Posts",  () => {
+    
+  
+    
+    
+       GetCallResponseResult =  GetCallResponse()
       .expect(200)
       .then((res) => {
         //GET Response Schema Validation
@@ -27,10 +39,9 @@ describe("API GET Tests", () => {
   });
 
   // Test 2 : Make a invalid GET request and verify the response payload is empty
-  it("GET - Invalid Request Error Handling", () => {
+  it("GET - Invalid Request Error Handling",  () => {
     return request
       .get(testdata.getinvalidtest)
-      .set(testdata.commonHeaders)
       .expect(400)
       .then((res) => {
         //assertion response is empty when invalid id is provided
@@ -41,17 +52,16 @@ describe("API GET Tests", () => {
   /*TODO : Schema Validation - contract testing */
 
   // Test 3 : Make a GET request to the multiple posts route and
-  it("GET - Response Validation for Multiple posts", async () => {
-    await request
-      .get(testdata.getrooturl)
-      .set(testdata.commonHeaders)
+  it("GET - Response Validation for Multiple posts",  () => {
+    return request
+    .get(testdata.getrooturl)
       .expect(200)
       .then((res) => {
         //assertion response is not empty and 100 posts exist
 
         assert.isNotEmpty(res.body);
-        assert.equal((res.body).length, 100);
-        console.log("Total records exist in response ", (res.body).length);
+        assert.equal(res.body.length, 100);
+        console.log("Total records exist in response ", res.body.length);
       });
   });
 });
