@@ -47,8 +47,8 @@ describe("API GET Tests", () => {
 /*TODO : Schema Validation - contract testing */
 
   // Test 3 : Make a GET request to the multiple posts route and 
-  it("GET - Response Validation for Multiple posts", () => {
-    return request
+  it("GET - Response Validation for Multiple posts", async () => {
+    await request
    .get(testdata.getrooturl)
    .set(testdata.commonHeaders)
    .expect(200)
@@ -58,6 +58,8 @@ describe("API GET Tests", () => {
      assert.isNotEmpty(res.body);   
      assert.equal(Object.keys(res.body).length, 100);
      console.log('Total records exist ',Object.keys(res.body).length);
+
+     
      
      
    });
