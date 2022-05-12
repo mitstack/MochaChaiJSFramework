@@ -11,7 +11,7 @@ describe("API PUT Test", () => {
   it("PUT API Response is Ok /posts", () => {
     return request
       .put(testdata.getvalidtest)
-      .set(testdata.commonHeaders)
+      
       .send(testdata.requestbody)
       .expect(200)
       .then((res) => {
@@ -30,7 +30,7 @@ describe("API PUT Test", () => {
   it("PUT API /posts Response is Ok when request body is empty ", () => {
     return request
       .put(testdata.getvalidtest)
-      .set(testdata.commonHeaders)
+      
       .expect(200)
       .then((res) => {
         //assertion response is not empty
@@ -48,7 +48,7 @@ describe("API PUT Test", () => {
   it("PUT API /posts Response is 404 when invalid route is called ", () => {
     return request
       .put(testdata.getrooturl)
-      .set(testdata.commonHeaders)
+      
       .expect(404)
       .then((res) => {
         //assertion response is not empty

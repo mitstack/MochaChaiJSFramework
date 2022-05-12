@@ -10,10 +10,7 @@ exports.testdata = {
     userId: 1,
   },
 
-  commonHeaders: {
-    "X-Testing-Value": 1,
-    "X-Common-Header": "value",
-  },
+  
 };
 
 exports.responsedata = {

@@ -9,15 +9,15 @@ var should = require("chai").should();
 /*TODO : Add Callback function ForEach loop to add test(s) data*/
 
 GetValidTestResponse = () => {
-  return request.get(testdata.getvalidtest).set(testdata.commonHeaders);
+  return request.get(testdata.getvalidtest);
 }
 
 GetInvalidTestResponse = () => {
-  return request.get(testdata.getinvalidtest).set(testdata.commonHeaders);
+  return request.get(testdata.getinvalidtest);
 }
 
-GetMultiplePostTestResponse = () => {
-  return request.get(testdata.getrooturl).set(testdata.commonHeaders);
+ GetMultiplePostTestResponse =  () => {
+   return   request.get(testdata.getrooturl);
 }
 
 describe("API GET Tests", () => {
@@ -50,7 +50,7 @@ describe("API GET Tests", () => {
 
   // Test 3 : Make a GET request to the multiple posts route and
   it("GET - Response Validation for Multiple posts", () => {
-    return ResponseResult = GetMultiplePostTestResponse()
+    return ResponseResult =  GetMultiplePostTestResponse()
       .expect(200)
       .then((res) => {
         //assertion response is not empty and 100 posts exist
