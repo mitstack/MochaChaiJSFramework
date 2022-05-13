@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/GETMethodTests.js"
+    "test": "mocha tests/POSTMethodTests.js"
 
   },
   "keywords": [],
