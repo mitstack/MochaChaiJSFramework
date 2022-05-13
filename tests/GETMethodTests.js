@@ -8,22 +8,22 @@ var should = require("chai").should();
 
 /*TODO : Add Callback function ForEach loop to add test(s) data*/
 
-GetValidTestResponse = () => {
+GetValidTestResponse = (() => {
   return request.get(testdata.getvalidtest);
-}
+})();
 
-GetInvalidTestResponse = () => {
+GetInvalidTestResponse = (() => {
   return request.get(testdata.getinvalidtest);
-}
+})();
 
- GetMultiplePostTestResponse =  () => {
+ GetMultiplePostTestResponse =  (() => {
    return   request.get(testdata.getrooturl);
-}
+})();
 
 describe("API GET Tests", () => {
   // Test 1 : Make a GET request to the single posts route and do schema validation
   it("GET - Response Validation for Single Posts", () => {
-    return ResponseResult = GetValidTestResponse()
+    return GetValidTestResponse
       .expect(200)
       .then((res) => {
         //GET Response Schema Validation
@@ -38,7 +38,7 @@ describe("API GET Tests", () => {
 
   // Test 2 : Make a invalid GET request and verify the response payload is empty
   it("GET - Invalid Request Error Handling", () => {
-    return ResponseResult = GetInvalidTestResponse()
+    return GetInvalidTestResponse
       .expect(400)
       .then((res) => {
         //assertion response is empty when invalid id is provided
@@ -50,7 +50,7 @@ describe("API GET Tests", () => {
 
   // Test 3 : Make a GET request to the multiple posts route and
   it("GET - Response Validation for Multiple posts", () => {
-    return ResponseResult =  GetMultiplePostTestResponse()
+    return GetMultiplePostTestResponse
       .expect(200)
       .then((res) => {
         //assertion response is not empty and 100 posts exist
