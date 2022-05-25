@@ -4,20 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/GETMethodTests.js"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    
-  },
   "directories": {
     "test": "tests"
   },
   "dependencies": {
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
+    "superagent-response-time": "^1.0.3",
     "supertest": "^6.2.3"
   },
   "description": ""

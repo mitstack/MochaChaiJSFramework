@@ -4,13 +4,6 @@ const { Suite, Test } = require("mocha");
 const { expect } = require("chai");
 const request = require("supertest")(testdata.apiendpoint);
 const { assert } = require("chai");
-var should = require("chai").should();
-
-/*TODO : Add Callback function ForEach loop to add test(s) data*/
-
-var GetInvalidTestResponse = (() => {
-  return request.get(testdata.getinvalidtest);
-})();
 
 var GetMultiplePostTestResponse = (() => {
   return request.get(testdata.getrooturl);
@@ -24,6 +17,9 @@ describe("API GET Tests", () => {
       return request
         .get(validtests)
         .expect(200)
+        .timeout({
+          response: 5000,
+        })
         .then((res) => {
           expect(res.body).to.deep.equal(
             responsedata.GETCallSingleresponsebody
@@ -42,21 +38,38 @@ describe("API GET Tests", () => {
 
   // Test 2 : Make a invalid GET request and verify the response payload is empty
   it("GET - Invalid Request Error Handling", () => {
-    return GetInvalidTestResponse.expect(400).then((res) => {
-      //assertion response is empty when invalid id is provided
-      assert.isEmpty(res.body);
-    });
+    const initialTime = performance.now();
+
+    return request
+      .get(testdata.getinvalidtest)
+      .expect(400)
+      .timeout({
+        response: 5000,
+      })
+      .then((res) => {
+        ResponseTime = performance.now() - initialTime;
+        //assertion response is empty when invalid id is provided
+
+        console.log("response time of the api", ResponseTime);
+
+        assert.isEmpty(res.body);
+      });
   });
 
   /*TODO : Schema Validation - contract testing */
   //Test 3 : Make a GET request to the multiple posts route and
   it("GET - Response Validation for Multiple posts", () => {
-    return GetMultiplePostTestResponse.expect(200).then((res) => {
-      //assertion response is not empty and 100 posts exist
+    return GetMultiplePostTestResponse.expect(200)
+      .timeout({
+        response: 5000,
+      })
 
-      assert.isNotEmpty(res.body);
-      assert.equal(res.body.length, 100);
-      console.log("Total records exist in response ", res.body.length);
-    });
+      .then((res) => {
+        //assertion response is not empty and 100 posts exist
+
+        assert.isNotEmpty(res.body);
+        assert.equal(res.body.length, 100);
+        console.log("Total records exist in response ", res.body.length);
+      });
   });
 });
