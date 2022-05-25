@@ -8,10 +8,6 @@ var should = require("chai").should();
 
 /*TODO : Add Callback function ForEach loop to add test(s) data*/
 
-var GetValidTestResponse = (() => {
-  return request.get(testdata.getvalidtest);
-})();
-
 var GetInvalidTestResponse = (() => {
   return request.get(testdata.getinvalidtest);
 })();
