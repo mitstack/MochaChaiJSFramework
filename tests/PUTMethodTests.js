@@ -4,16 +4,19 @@ const { Suite, Test } = require("mocha");
 const { expect } = require("chai");
 const request = require("supertest")(testdata.apiendpoint);
 const assert = require("chai").assert;
-var should = require("chai").should();
+
+var PutValidResponse = ()=> {
+  return request
+      .put(testdata.getvalidtest)
+      
+      .send(testdata.requestbody)
+}
+
 
 describe("API PUT Test", () => {
   // Test - 1 : Make a PUT request to the posts route and update the newly added user
   it("PUT API Response is Ok /posts", () => {
-    return request
-      .put(testdata.getvalidtest)
-      
-      .send(testdata.requestbody)
-      .expect(200)
+  return PutValidResponse 
       .then((res) => {
         //assertion response is not empty
         assert.isNotEmpty(res.body);

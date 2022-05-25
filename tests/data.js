@@ -2,7 +2,8 @@ exports.testdata = {
   apiendpoint: "https://jsonplaceholder.typicode.com",
   getrooturl: "/posts",
   getvalidtest: "/posts/1",
-  getinvalidtest: "%$",
+  getvaliddynamictest : ["/posts/1"],
+  getinvalidtest: "/%$",
 
   requestbody: {
     title: "foo",
@@ -10,6 +11,9 @@ exports.testdata = {
     userId: 1,
   },
 
+  headers : {
+    authorization: "Olo-token"
+  }
   
 };
 
@@ -39,3 +43,6 @@ exports.responsedata = {
     id: 1,
   },
 };
+
+
+
