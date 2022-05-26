@@ -45,4 +45,8 @@ describe("End To End Tests", () => {
           });
       });
   });
+
+  it("Make sure user is deleted succesfully", ()=> {
+
+  })
 });
