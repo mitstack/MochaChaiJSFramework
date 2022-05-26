@@ -19,37 +19,30 @@ Step -5  - Listing the posts by calling the GET route and make sure deleted post
 describe("End To End Tests", () => {
   //Posting the data
 
-  it("Delete the recently updated post", () => {
-    var requestbody = {
-      title: "foo",
-      body: "bar",
-      userId: 1,
-    };
-
+  it("Make sure the recently added post got added", () => {
+    initialTime = performance.now();
     return request
-      .post("/posts")
-      .send(requestbody)
+      .post(testdata.getrooturl)
+      .send(testdata.requestbody)
       .expect(201)
-      .then((response1) => {
-        // verify post response
-        assert.isNotEmpty(response1.body);
-       // console.log("response of the post call", response1.body);
-       
-      return request
-      .get("/posts/1")
-      .expect(200)
-      .then(response2 => {
-        assert.isNotEmpty(response2.body);
-        console.log("response of the post call earlier", response1.body)
-        console.log("response of the get call", response2.body)
+      .then((postresponse) => {
+        ResponseTime = performance.now() - initialTime;
+        console.log(ResponseTime);
+        assert.isNotEmpty(postresponse.body);
+        const requestId = testdata.getrooturl + "/" + postresponse.body.userId;
         
-
-      })
+        
+        initialTime = performance.now();
+        return request
+          .get(requestId)
+          .expect(200)
+          .then((getresponse) => {
+            ResponseTime = performance.now() - initialTime;
+            console.log(ResponseTime);
+            assert.isNotEmpty(getresponse.body);
+            assert.equal(postresponse.body.userId, getresponse.body.id);
+            
+          });
       });
-
-   
-
-    
-      
   });
 });
