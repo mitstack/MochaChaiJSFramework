@@ -1,4 +1,4 @@
-# MochaChaiJSFramework
+# SupertestMochaChaiJSFramework
 
 MochaChaiJSFramework Using Mocha Chai testing framework in javascript.
 
